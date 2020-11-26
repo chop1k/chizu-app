@@ -1,0 +1,23 @@
+{
+  "name": "chizu/app",
+  "description": "Application basis",
+  "type": "library",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "chop1k",
+      "email": "fakeshopendesu@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.4",
+    "chizu/module": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chizu\\App\\": "src/"
+    }
+  }
+}
