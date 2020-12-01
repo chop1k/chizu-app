@@ -4,6 +4,7 @@ namespace Chizu\App;
 
 use Chizu\DI\Container;
 use Chizu\Event\Dispatcher;
+use Chizu\Module\Modules;
 
 class Application
 {
@@ -24,6 +25,16 @@ class Application
         return $this->container;
     }
 
+    protected Modules $modules;
+
+    /**
+     * @return Modules
+     */
+    public function getModules(): Modules
+    {
+        return $this->modules;
+    }
+
     public function __construct()
     {
         $this->dispatcher = new Dispatcher();
@@ -36,6 +47,7 @@ class Application
         });
 
         $this->container = new Container();
+        $this->modules = new Modules();
     }
 
     protected function onStart(): void
