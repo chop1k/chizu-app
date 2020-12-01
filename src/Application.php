@@ -4,6 +4,7 @@ namespace Chizu\App;
 
 use Chizu\DI\Container;
 use Chizu\Event\Dispatcher;
+use Chizu\Event\Event;
 use Chizu\Module\Modules;
 
 class Application
@@ -39,12 +40,12 @@ class Application
     {
         $this->dispatcher = new Dispatcher();
 
-        $this->dispatcher->listen(self::StartEvent, function () {
+        $this->dispatcher->set(self::StartEvent, new Event([function () {
             $this->onStart();
-        });
-        $this->dispatcher->listen(self::EndEvent, function () {
+        }]));
+        $this->dispatcher->set(self::EndEvent, new Event([function () {
             $this->onEnd();
-        });
+        }]));
 
         $this->container = new Container();
         $this->modules = new Modules();
@@ -62,7 +63,7 @@ class Application
 
     public function start(): void
     {
-        $this->dispatcher->dispatch(self::StartEvent, null);
-        $this->dispatcher->dispatch(self::EndEvent, null);
+        $this->dispatcher->dispatch(self::StartEvent);
+        $this->dispatcher->dispatch(self::EndEvent);
     }
 }
